@@ -25,6 +25,7 @@ class AppIcons {
   static const String clear= '$iconsPath/clear.svg';
   static const String remove= '$iconsPath/remove.svg';
   static const String download= '$iconsPath/download.svg';
+  static const String timer= '$iconsPath/timer.svg';
     //bottombar
   static const String homeOutlined= '$iconsPath/home_outlined.svg';
   static const String ordersOutlined= '$iconsPath/orders_outlined.svg';

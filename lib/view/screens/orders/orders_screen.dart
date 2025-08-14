@@ -5,6 +5,8 @@ import 'package:movo_customer/utils/constants/icon_constants.dart';
 import 'package:movo_customer/view/widgets/custom_elevated_button.dart';
 import 'package:movo_customer/view/widgets/custom_image_view.dart';
 
+import 'order_details_screen.dart';
+
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({Key? key}) : super(key: key);
 
@@ -45,6 +47,7 @@ class OrdersScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             _buildOrderCard(
+              context: context,
               pickupName: 'Suresh Pyla',
               pickupId: '9876543218',
               dropName: 'Akhil Diddi',
@@ -58,6 +61,7 @@ class OrdersScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             _buildOrderCard(
+              context: context,
               pickupName: 'Suresh Pyla',
               pickupId: '9876543218',
               dropName: 'Akhil Diddi',
@@ -71,6 +75,7 @@ class OrdersScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             _buildOrderCard(
+              context: context,
               pickupName: 'Maya Singh',
               pickupId: '1234567890',
               dropName: 'Ravi Kumar',
@@ -111,20 +116,42 @@ class OrdersScreen extends StatelessWidget {
     required String vehicleType,
     required String time,
     required String cost,
+    required BuildContext context,
+
   }) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+    return InkWell(
+        onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => TripDetailsScreen(
+            pickupName: pickupName,
+            pickupId: pickupId,
+            dropName: dropName,
+            dropId: dropId,
+            pickupLocation: pickupLocation,
+            dropLocation: dropLocation,
+            status: status,
+            vehicleType: vehicleType,
+            time: time,
+            cost: cost,
           ),
-        ],
-      ),
+        ),
+      );
+    },
+    child: Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(16),
+    boxShadow: [
+    BoxShadow(
+    color: Colors.black.withOpacity(0.06),
+    blurRadius: 8,
+    offset: const Offset(0, 2),
+    ),
+    ],
+    ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -359,6 +386,7 @@ class OrdersScreen extends StatelessWidget {
                 color: AppColors.white,
                 fontFamily: "Poppins"
 
+
               ),
 
               text:
@@ -368,7 +396,7 @@ class OrdersScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ));
   }
 
 }
