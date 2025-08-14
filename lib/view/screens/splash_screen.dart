@@ -4,6 +4,7 @@ import '../../theme/custom_text_style.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/constants/icon_constants.dart';
 import '../widgets/custom_image_view.dart';
+import 'language_selection_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if(mounted){
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>    const SplashScreen()), // Replace with your next screen
+          MaterialPageRoute(builder: (context) =>    const LanguageSelectionScreen()), // Replace with your next screen
 
         );
       }
@@ -40,14 +41,14 @@ class _SplashScreenState extends State<SplashScreen> {
               imagePath: AppIcons.appLogo,
             ),
             const Spacer(),
-            Text(
-              'All Your Dental Needs in',
-              style: CustomTextStyles.b1,
-            ),
-            Text(
-              'One Place',
-              style: CustomTextStyles.b1,
-            ),
+            // Text(
+            //   'All Your Dental Needs in',
+            //   style: CustomTextStyles.b1,
+            // ),
+            // Text(
+            //   'One Place',
+            //   style: CustomTextStyles.b1,
+            // ),
             // Spacer(),
             const SizedBox(height: 16,),
             const SpinKitCircle(

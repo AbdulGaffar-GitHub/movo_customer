@@ -26,7 +26,7 @@ class AppColors {
   static const Color splashBg = Color(0xFFFAFAFA);
 
   // Primary colors
-  static const Color primary = Color(0xFF860579);
+  static const Color primary = Color(0xFF5B2C6F);
   static const Color primary2 = Color(0xFFF3E6F2);
 
 //Secondary Colors

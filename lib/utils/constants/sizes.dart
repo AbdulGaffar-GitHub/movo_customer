@@ -44,7 +44,7 @@ class AppSizes {
 
   // Button sizes
   static const double buttonPadding = 8;
-  static const double buttonRadius = 16;
+  static const double buttonRadius = 12;
   static const double buttonWidth = 120;
   static const double buttonElevation = 4;
 
