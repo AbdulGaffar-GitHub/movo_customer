@@ -78,6 +78,8 @@ dependencies:
   flutter_dotenv: ^5.2.1
   photo_view: ^0.15.0
   google_api_headers: ^4.2.6
+  pinput: ^3.0.1
+
 
 
 dev_dependencies:
@@ -108,7 +110,6 @@ flutter:
     - assets/illustrations/
     - assets/images/
     - assets/gif/
-    - .env
 
   #  fonts:
   #    - family: Poppins
