@@ -112,7 +112,11 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
                   _pickupDropSection(),
                   const SizedBox(height: 8),
                   _statusSection(),
-                  const Divider(),
+                  const Divider(
+                    color:Color(0xff808080), // Light grey but visible
+                    thickness: 1,
+                    height: 16,
+                  ),
                   _driverFareSection(),
                 ],
               ),
@@ -131,26 +135,24 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          height: 50,
+        bottomNavigationBar: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          padding: const EdgeInsets.fromLTRB(16, 20, 16, 20), // more padding for height
           child: CustomElevatedButton(
-            text: "Book Again",
+            onPressed: () {},
+            height: 50, // fixed button height
             buttonStyle: ButtonStyle(
               backgroundColor: WidgetStateProperty.all(AppColors.primary),
-              shape: WidgetStateProperty.all(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              ),
             ),
-            buttonTextStyle: CustomTextStyles.b3_1.copyWith(
-              color: Colors.white,
-              fontFamily: "Poppins",
-            ),
-            onPressed: () {},
+            text: "Book Again",
           ),
-        ),
-      ),
+        )
     );
   }
 
@@ -158,15 +160,42 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          "CRN9876543219\n${widget.time}",
-          style: CustomTextStyles.b6_3.copyWith(fontFamily: "Poppins"),
+        Row(
+          children: [
+            // Yellow round timer icon
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: const BoxDecoration(
+                color: Color(0xFFFFA500), // Orange/Yellow
+                shape: BoxShape.circle,
+              ),
+              child: CustomImageView(
+                imagePath: AppIcons.timer, // Your timer icon path
+                height: 14,
+                width: 14,
+                color: Colors.white, // Icon color
+              ),
+            ),
+            const SizedBox(width: 12),
+
+            // CRN and time text
+            Text(
+              "CRN9876543219\n${widget.time}",
+              style: CustomTextStyles.b6_3.copyWith(fontFamily: "Poppins"),
+            ),
+          ],
         ),
+
+        // Stars rating
         Row(
           children: List.generate(
-              5,
-                  (index) => const Icon(Icons.star,
-                  size: 16, color: Colors.orangeAccent)),
+            5,
+                (index) => const Icon(
+              Icons.star,
+              size: 16,
+              color: Colors.black,
+            ),
+          ),
         )
       ],
     );
@@ -183,7 +212,7 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
                   color: Colors.green.shade50, shape: BoxShape.circle),
               child: CustomImageView(imagePath: AppIcons.location),
             ),
-            const SizedBox(width: 6),
+            const SizedBox(width: 12),
             Expanded(
               child: Text(
                 "${widget.pickupName} ${widget.pickupId}\n${widget.pickupLocation}",
@@ -206,7 +235,7 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
                 color: Colors.red,
               ),
             ),
-            const SizedBox(width: 6),
+            const SizedBox(width: 12),
             Expanded(
               child: Text(
                 "${widget.dropName} ${widget.dropId}\n${widget.dropLocation}",
@@ -232,7 +261,7 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
           ),
           child: CustomImageView(imagePath: AppIcons.correct),
         ),
-        const SizedBox(width: 6),
+        const SizedBox(width: 12),
         Text(
           widget.status,
           style: CustomTextStyles.b6_3.copyWith(
@@ -253,16 +282,39 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
       children: [
         Row(
           children: [
-            CustomImageView(imagePath: AppIcons.motorcycle, height: 20),
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: CustomImageView(
+                imagePath: AppIcons.motorcycle,
+                height: 20,
+                width: 20,
+                color: const Color(0xFF5B2C6F),
+              ),
+            ),
             const SizedBox(width: 8),
-            Text("Vikas\n${widget.vehicleType} | TS-09-C 4299",
-                style: CustomTextStyles.b6_3.copyWith(fontFamily: "Poppins")),
+            Text(
+              "Vikas\n${widget.vehicleType} | TS-09-C 4299",
+              style: CustomTextStyles.b6_3.copyWith(fontFamily: "Poppins"),
+            ),
           ],
         ),
         Text(
           widget.cost,
           style: CustomTextStyles.b3_1.copyWith(
-              fontFamily: "Roboto", color: Colors.green),
+            fontFamily: "Roboto",
+            color: Colors.green,
+          ),
         ),
       ],
     );
@@ -278,49 +330,177 @@ class _TripDetailsScreenState extends State<TripDetailsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Fare details",
-              style: CustomTextStyles.b4_1.copyWith(fontFamily: "Poppins")),
-          const SizedBox(height: 8),
-          _fareRow("Trip Fare", "₹550"),
-          _fareRow("Discount Applied", "-₹50"),
-          _fareRow("Fare Without Tax", "₹550"),
-          _fareRow("CGST Tax", "₹0"),
-          _fareRow("SGST Tax", "₹0"),
+          // Header row
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  CustomImageView(
+                    imagePath: AppIcons.reports, // Your receipt icon path
+                    height: 18,
+                    width: 18,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    "Fare details",
+                    style: CustomTextStyles.b4_1.copyWith(fontFamily: "Poppins"),
+                  ),
+                ],
+              ),
+              CustomImageView(
+                imagePath: AppIcons.download,
+                height: 18,
+                width: 18,
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+
+          // Trip Fare + discount text
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Trip Fare",
+                    style:
+                    CustomTextStyles.b6_3.copyWith(fontFamily: "Poppins"),
+                  ),
+                  Text(
+                    "Discount Applied of ₹50",
+                    style: CustomTextStyles.b6_3.copyWith(
+                      fontFamily: "Poppins",
+                      fontSize: 12,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+              Text(
+                "₹550",
+                style: CustomTextStyles.b6_3.copyWith(fontFamily: "Poppins"),
+              ),
+            ],
+          ),
+          _dottedDivider(),
+
+          _fareRow("Fare Without Tax", "₹550",),
+          _dottedDivider(),
+
+          _fareRow("CGST Tax", "₹0.0"),
+          _dottedDivider(),
+
+          _fareRow("SGST Tax", "₹0.0"),
+          _dottedDivider(),
+
           _fareRow("Rounding", "₹0.15"),
           const Divider(),
+
+          // Total Order Fare
           _fareRow("Total Order Fare", "₹550", isBold: true),
+          const SizedBox(height: 4),
+          Text(
+            "Incl. all taxes and charges",
+            style: CustomTextStyles.b6_3.copyWith(
+              fontFamily: "Poppins",
+              fontSize: 12,
+              color: Colors.grey,
+            ),
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget _fareRow(String label, String value, {bool isBold = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: isBold
+                ? CustomTextStyles.b4_1.copyWith(fontFamily: "Poppins")
+                : CustomTextStyles.b6_3.copyWith(fontFamily: "Poppins"),
+          ),
+          Text(
+            value,
+            style: isBold
+                ? CustomTextStyles.b4_1.copyWith(fontFamily: "Poppins")
+                : CustomTextStyles.b6_3.copyWith(fontFamily: "Poppins"),
+          ),
+        ],
+      ),
+    );
+  }
+
+// Custom dotted divider
+  Widget _dottedDivider() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final dashWidth = 4.0;
+          final dashCount = (constraints.maxWidth / (2 * dashWidth)).floor();
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(dashCount, (_) {
+              return SizedBox(
+                width: dashWidth,
+                height: 1,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(color: Colors.grey.shade400),
+                ),
+              );
+            }),
+          );
+        },
       ),
     );
   }
 
   Widget _paymentDetailsCard() {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 6,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
-      child: _fareRow("Payment Details", "Cash", isBold: true),
-    );
-  }
-
-  Widget _fareRow(String label, String value, {bool isBold = false}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label,
-              style: isBold
-                  ? CustomTextStyles.b4_1.copyWith(fontFamily: "Poppins")
-                  : CustomTextStyles.b6_3.copyWith(fontFamily: "Poppins")),
-          Text(value,
-              style: isBold
-                  ? CustomTextStyles.b4_1.copyWith(fontFamily: "Poppins")
-                  : CustomTextStyles.b6_3.copyWith(fontFamily: "Poppins")),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Payment Details",
+                style: CustomTextStyles.b4_1.copyWith(fontFamily: "Poppins"),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                "Cash",
+                style: CustomTextStyles.b6_3.copyWith(fontFamily: "Poppins"),
+              ),
+            ],
+          ),
+          Text(
+            "₹550",
+            style: CustomTextStyles.b4_1.copyWith(fontFamily: "Poppins"),
+          ),
         ],
       ),
     );
   }
+
 }
