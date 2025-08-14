@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movo_customer/theme/custom_text_style.dart';
+import 'package:movo_customer/view/screens/home/select_vehicle_screen.dart';
 import 'package:movo_customer/view/widgets/custom_image_view.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/icon_constants.dart';
 import '../account/account_screen.dart';
 import '../orders/orders_screen.dart';
+import '../wallets/add_wallet_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _buildHomeContent(),
       OrdersScreen(),// index 0
       Center(child: Text("Coins Screen")), // index 2
-      Center(child: Text("Wallet Screen")),
+      WalletScreen(),
       AccountScreen()// index 3
     ];
 
@@ -201,46 +203,45 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   /// Card widget for options
+  /// Card widget for options
   Widget _buildOptionCard(String imagePath, String title) {
-    return Container(
-      height: 88,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20), // softer round
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.25),
-            blurRadius: 4,
-            offset: const Offset(2, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          const SizedBox(width: 50), // left gap before image
-
-          CustomImageView(
-            imagePath: imagePath,
-          ),
-
-          const SizedBox(width: 70), // gap between image & text
-
-          Expanded(
-            child: Text(
-              title,
-              style: CustomTextStyles.b4_1.copyWith(
-                fontFamily: "Poppins"
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const SelectVehicleScreen()),
+        );
+      },
+      child: Container(
+        height: 88,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.25),
+              blurRadius: 4,
+              offset: const Offset(2, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            const SizedBox(width: 50), // left gap before image
+            CustomImageView(imagePath: imagePath),
+            const SizedBox(width: 70), // gap between image & text
+            Expanded(
+              child: Text(
+                title,
+                style: CustomTextStyles.b4_1.copyWith(fontFamily: "Poppins"),
               ),
             ),
-          ),
-
-           Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: CustomImageView(
-              imagePath: AppIcons.arrowForward,
-            )
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: CustomImageView(imagePath: AppIcons.arrowForward),
+            ),
+          ],
+        ),
       ),
     );
   }

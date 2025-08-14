@@ -26,6 +26,7 @@ class AppIcons {
   static const String remove= '$iconsPath/remove.svg';
   static const String download= '$iconsPath/download.svg';
   static const String timer= '$iconsPath/timer.svg';
+  static const String wallet1= '$iconsPath/wallet1.svg';
     //bottombar
   static const String homeOutlined= '$iconsPath/home_outlined.svg';
   static const String ordersOutlined= '$iconsPath/orders_outlined.svg';
@@ -46,6 +47,7 @@ class AppIcons {
   static const String correct= '$iconsPath/correct.svg';
   static const String motorcycle= '$iconsPath/motorcycle.svg';
   static const String fourwheeler= '$iconsPath/fourwheeler.svg';
+  static const String wallet2= '$iconsPath/wallet2.svg';
 
 
 
