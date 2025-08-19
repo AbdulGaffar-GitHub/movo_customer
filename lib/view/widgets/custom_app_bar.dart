@@ -64,7 +64,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Widget _buildTitle(){
-    return Text(title ?? '', style: textStyle ?? CustomTextStyles.b3.copyWith(color: textColor),);
+    return Text(title ?? '', style: textStyle ?? CustomTextStyles.b3_primary1.copyWith(color: textColor ?? AppColors.primary),);
   }
 
   Widget? _leading(BuildContext context) {
@@ -86,7 +86,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: AppSizes.md),
           child: CustomImageView(
-            color: leadingBackColor ?? AppColors.white,
+            color: leadingBackColor ?? AppColors.primary,
             imagePath:  AppIcons.arrowBack,
             width: 24,
             height: 24,

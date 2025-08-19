@@ -49,10 +49,11 @@ class AppIcons {
   static const String fourwheeler= '$iconsPath/fourwheeler.svg';
   static const String wallet2= '$iconsPath/wallet2.svg';
 
-
-
-//Home Screen
-  // static const String location = '$iconsPath/location.svg';
+  static const String workOutlined = '$iconsPath/work_outline.svg';
+  static const String markerOutlined = '$iconsPath/marker_outline.svg';
+  static const String friendAndFamOutlined = '$iconsPath/fam_friend.svg';
+  static const String contact = '$iconsPath/contact.svg';
+  static const String edit = '$iconsPath/edit.svg';
 
   //profile screen
   // static const String graduationCap = '$iconsPath/graduation_cap.svg';

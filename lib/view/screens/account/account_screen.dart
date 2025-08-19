@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:movo_customer/theme/custom_text_style.dart';
 import 'package:movo_customer/utils/constants/icon_constants.dart';
+import 'package:movo_customer/view/screens/saved_addresses/saved_address_screen.dart';
 import 'package:movo_customer/view/widgets/custom_elevated_button.dart';
 import 'package:movo_customer/view/widgets/custom_image_view.dart';
 import 'package:movo_customer/view/widgets/custom_outlined_button.dart';
@@ -149,31 +152,39 @@ class AccountScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     _menuTile(
+                      onTap: (){
+                        Get.to(() => SavedAddressesScreen(isForSelection: true));
+                      },
                       icon: CustomImageView(imagePath:AppIcons.location1,),
                       title: 'Saved Addresses',
                       showDivider: true,
                     ),
                     _menuTile(
+                      onTap: (){},
                       icon: CustomImageView(imagePath:AppIcons.refer,),
                       title: 'Refer & Earn',
                       showDivider: true,
                     ),
                     _menuTile(
+                      onTap: (){},
                       icon: CustomImageView(imagePath:AppIcons.language,),
                       title: 'Choose Languages',
                       showDivider: true,
                     ),
                     _menuTile(
+                      onTap: (){},
                       icon: CustomImageView(imagePath:AppIcons.help,),
                       title: 'Help & Support',
                       showDivider: true,
                     ),
                     _menuTile(
+                      onTap: (){},
                       icon: CustomImageView(imagePath:AppIcons.termsandcond,),
                       title: 'Terms & Conditions',
                       showDivider: true,
                     ),
                     _menuTile(
+                      onTap: (){},
                       icon: CustomImageView(imagePath:AppIcons.about,),
                       title: 'About Us',
                       showDivider: false,
@@ -228,37 +239,41 @@ class AccountScreen extends StatelessWidget {
 
   // Single row tile with divider like in the screenshot
   Widget _menuTile({
+    required Function() onTap,
     required Widget icon, // ✅ Changed from IconData to Widget
     required String title,
     required bool showDivider,
   }) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          child: Row(
-            children: [
-              icon, // ✅ Directly use the widget
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  title,
-                  style: CustomTextStyles.b6_1.copyWith(
-                    fontFamily: "Poppins",
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Row(
+              children: [
+                icon, // ✅ Directly use the widget
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: CustomTextStyles.b6_1.copyWith(
+                      fontFamily: "Poppins",
+                    ),
                   ),
                 ),
-              ),
-              CustomImageView(imagePath: AppIcons.arrowForward),
-            ],
+                CustomImageView(imagePath: AppIcons.arrowForward),
+              ],
+            ),
           ),
-        ),
-        if (showDivider)
-          Divider(
-            height: 1,
-            thickness: 1,
-            color: Colors.black.withOpacity(0.06),
-          ),
-      ],
+          if (showDivider)
+            Divider(
+              height: 1,
+              thickness: 1,
+              color: Colors.black.withOpacity(0.06),
+            ),
+        ],
+      ),
     );
   }
 }
